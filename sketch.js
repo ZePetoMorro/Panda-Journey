@@ -41,7 +41,7 @@ function setup() {
   console.log(isMobile)
 }
 function draw() {
-  
+  document.body.style.backgroundColor="#021538"
   background(200)
   switch(tela){
     case 0:
