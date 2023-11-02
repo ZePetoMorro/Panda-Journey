@@ -7,6 +7,9 @@ var sqH=25;
 var pY,qFrame,pontos,qY,tela=0;
 var moving=false;
 
+var startTime; // Variável para armazenar o tempo de início
+var elapsedTime = 0; // Variável para armazenar o tempo decorrido
+
 var isMobile = window.orientation > -1;
 
 var frames=2
@@ -34,14 +37,14 @@ function setup() {
  {"y":320,"x":75,"w":275}
     ]
   }
-  
+  startTime = millis()
   resetGame()
   resetQx()
   resetCh()
   console.log(isMobile)
 }
 function draw() {
-  document.body.style.backgroundColor="#021538"
+ // document.body.style.backgroundColor="#021538"
   background(200)
   switch(tela){
     case 0:
@@ -63,7 +66,7 @@ function draw() {
       cred()
   }
   
-  
+  elapsedTime = millis() - startTime;
   
   
 }
@@ -123,7 +126,7 @@ function mouseClicked(){
   }
   if(tela==0){
     //220,200,150,50.5
-    if(mouseX>220&&mouseX<370&&mouseY>200&&mouseY<250.5)fase()
+    if(mouseX>220&&mouseX<370&&mouseY>200&&mouseY<250.5){loop();fase()}
  if(mouseX>220&&mouseX<370&&mouseY>260&&mouseY<310.5)instrus()
     if(mouseX>220&&mouseX<370&&mouseY>320&&mouseY<370.5)cred()
   }
@@ -132,7 +135,7 @@ function mouseClicked(){
   }
   if(tela==4){
   // 130,300,170,50.5
-    if((mouseX>130&&mouseX<300&&mouseY>300&&mouseY<350.5)){menuP()}
+    if((mouseX>112.5&&mouseX<282.5&&mouseY>300&&mouseY<350.5)){loop();menuP()}
   }
   if(tela==5){
     if((mouseX>5&&mouseX<55.5&&mouseY>5&&mouseY<53)){menuP()}
@@ -153,7 +156,7 @@ function enemy(){
   //arq,x,y,tamL,tamA,corteX,corteY,tamCorteL,tamCorteA
   image(sheet,qX,qY,qO,qO,400*qFrame,1000,400,400)
   qY+=qSPD
-  if(qY>400){resetQx();qSPD+=0.3}
+  if(qY>400){resetQx();qSPD+=0.2}
   if(position.posP[posR].x < qX + qO &&
     position.posP[posR].x + sqW > qX &&
     position.posP[posR].y < qY + qO &&
@@ -165,7 +168,7 @@ function enemy(){
 }
 function lostPoint(){
   resetQx()
-  qSPD=1
+  qSPD+=0.5
   posR++
   if(posR>3){
     posR=0
@@ -179,7 +182,7 @@ function lostPoint(){
 function limites(){
   directt()
   toucherr()
-  if(position.posP[posR].x>position.posPonte[posR].x+position.posPonte[posR].w){resetCh();pontos++;qSPD+=0.3}
+  if(position.posP[posR].x>position.posPonte[posR].x+position.posPonte[posR].w){resetCh();pontos++;qSPD+=0.5}
   if(position.posP[posR].x<position.posPonte[posR].x-30)position.posP[posR].x=position.posPonte[posR].x-30
   
 }
