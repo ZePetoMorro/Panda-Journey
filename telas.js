@@ -73,7 +73,8 @@ function pauseCena(){
   fill("white")
   text("JOGO PAUSADO",70,65)
   textSize(25)
-  
+  let seconds = Math.floor(elapsedTime / 1000);
+  text("Seu Tempo: "+seconds,120,200)
   text("Seus Pontos: "+pontos,120,250)
   pop()
   gameBTN(130,300,170,50.5,"#B5B6B4","Tela Inicial")
@@ -119,15 +120,35 @@ function gameOver(){
   pop()
   push()
   textStyle(BOLD)
-  textSize(35)
-  text("Fim de jogo!",80,65)
-  textSize(25)
   stroke(0)
   strokeWeight(3)
   fill("white")
-  text("Você fez: "+hr+" pontos",120,250)
+  textSize(35)
+  text("Fim de jogo!",95,65)
+  textSize(25)
+  let seconds = Math.floor(elapsedTime / 1000);
+
+  let minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+  
+  noLoop()
+  
+  text(hr+" Vezes",160,140)
+  
+  if(minutes>0){
+    textSize(18)
+  text("Durante "+minutes + " Minutos e " + seconds+" Segundos",55,200)
+  }
+  //text(nf(minutes, 2) + " Minutos e" + nf(seconds, 2)+" Segundos",150,240)
+  else
+  text("Durante "+seconds+" Segundos",75,200)
+  //text(seconds+" Segundos",150,240)
+  //text("Seu Tempo: ",120,200)
+  text("Obrigado por ter jogado!",50,275)
+  textSize(20)
+  text("Pandas atravessaram a ponte",60,110)
   pop()
-  gameBTN(130,300,170,50.5,"#B5B6B4","Tela Inicial")
+  gameBTN(112.5,300,170,50.5,"#B5B6B4","Tela Inicial")
 }
 function cred(){
   tela=5
@@ -142,8 +163,8 @@ function cred(){
   stroke(0)
   strokeWeight(3)
   fill("white")
-  text("Créditos",80,65)
-  textSize(15)
+  text("CRÉDITOS",100,65)
+  textSize(17)
   text("Programador e\nIdealizador Original\nJósimo Moura",140,100)
   text("Educador e Orientador\nOrivaldo Santana",140,210)
   text("Programador e Artista\nGabriel Bitencourt",140,310)
